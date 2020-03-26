@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='content-display'>
+        <h2>Here is the content</h2>
+    </div>
+    <form action='/posts' method='POST'>
+        <label for='name'>
+            Name: 
+            <input type='text' name='name' />
+        </label>
+        <label for='message'>
+            Message:
+            <input type='text' name='message' />
+        </label>
+        <button type='submit'>Submit!</button>
+    </form>
+    <script>
+        let displayArea = document.getElementById('content-display')
+
+        fetch('/posts').then(res=>res.json()).then((items) => {
+            items.forEach((item) => {
+                displayArea.innerHTML += `<h4>${item.date}</h4><h4>${item.name}</h4><p>${item.content}</p><br>`
+            })
+        })
+    </script>
+</body>
+</html>
